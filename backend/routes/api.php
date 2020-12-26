@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Passiflora\Http\Controllers\Auth\JwtController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('login',
+    [JwtController::class, 'login']
+)->name('api.login');
+
+Route::middleware('auth:api')->group(function () {
+
+    Route::post('logout',
+        [JwtController::class, 'logout']
+    )->name('api.logout');
+
+    Route::post('refresh',
+        [JwtController::class, 'refresh']
+    )->name('api.refresh');
+
+    Route::post('me',
+        [JwtController::class, 'me']
+    )->name('api.me');
 });

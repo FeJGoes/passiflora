@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
+use Passiflora\Models\Usuario;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +15,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        Model::reguard();
+
+        Usuario::create([
+            'nome' => 'Joãozinho da Silva',
+            'email' => 'joaozinho@email.com',
+            'senha' => 'Abc102030',
+        ]);
     }
 }
